@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateEvergineContent>True</GenerateEvergineContent>
+    <GenerateEvergineAssets>False</GenerateEvergineAssets>
+    <GenerateEvergineScenesCode>True</GenerateEvergineScenesCode>
+    <LangVersion>10</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Evergine.Common" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.Components" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.Framework" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.Mathematics" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.NoesisGUI" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.Platform" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.Bullet" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.Targets" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.CodeScenes" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.OpenAL" Version="2022.2.16.4" />
+    <PackageReference Include="Evergine.OpenGL" Version="2022.2.16.4" />
+  </ItemGroup>
+</Project>

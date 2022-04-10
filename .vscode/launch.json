@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build",
+            "args": [],
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "program": "${workspaceFolder}/Vignette.Windows/bin/Debug/net6.0-windows/Vignette.Windows.dll",
+            "cwd": "${workspaceFolder}/Vignette.Windows"
+        }
+    ]
+}
