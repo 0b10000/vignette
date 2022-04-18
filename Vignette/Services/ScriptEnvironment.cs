@@ -19,6 +19,7 @@ public class ScriptEnvironment : Service
     }
 
     private V8Runtime runtime;
+    private V8ScriptEngine engine;
 
     public V8ScriptEngine CreateEngine(string identifier, bool debuggable = false)
     {
@@ -59,10 +60,12 @@ public class ScriptEnvironment : Service
     protected override void OnLoaded()
     {
         runtime = new V8Runtime(V8RuntimeFlags.EnableDynamicModuleImports);
+        engine = runtime.CreateScriptEngine();
     }
 
     protected override void OnDestroy()
     {
+        engine.Dispose();
         runtime.Dispose();
     }
 
