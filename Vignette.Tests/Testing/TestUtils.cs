@@ -4,7 +4,7 @@
 using System;
 using System.Reflection;
 
-namespace Vignette.Tests.Testing;
+namespace Vignette.Framework.Tests.Testing;
 
 public class TestUtils
 {

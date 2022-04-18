@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
-using Vignette.Platform;
+using Vignette.Framework.Platform;
 
-namespace Vignette.Tests.Testing;
+namespace Vignette.Framework.Tests.Testing;
 
 /// <summary>
 /// A host that runs in the background.
@@ -25,9 +25,9 @@ public class HeadlessHost : Host
 
         Load();
 
-        updateThread = new Thread(() =>
+        updateThread = new Thread((obj) =>
         {
-            while (!token.Token.IsCancellationRequested)
+            while (!((CancellationToken)obj).IsCancellationRequested)
             {
                 while (queue.TryDequeue(out var action))
                     action.Invoke();
@@ -36,7 +36,7 @@ public class HeadlessHost : Host
             }
         });
 
-        updateThread.Start();
+        updateThread.Start(token.Token);
     }
 
     protected override void Dispose(bool disposing)

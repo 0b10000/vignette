@@ -4,12 +4,12 @@
 using System;
 using Evergine.Common.Audio;
 using Evergine.Common.Graphics;
-using Evergine.OpenAL;
-using Evergine.OpenGL;
 using Evergine.Framework.Graphics;
 using Evergine.Framework.Services;
+using Evergine.OpenAL;
+using Evergine.OpenGL;
 
-namespace Vignette.Platform;
+namespace Vignette.Framework.Platform;
 
 /// <summary>
 /// A host capable of launching and displaying contents to a window.
@@ -36,9 +36,7 @@ public abstract class DesktopHost : Host
         Game.Container.RegisterInstance(graphicsContext = CreateGraphicsContext());
         Game.Container.RegisterInstance(CreateAudioDevice());
 
-        Window = windowsSystem.CreateWindow(Name, default_width, default_height);
-
-        Prepare();
+        Window = windowsSystem.CreateWindow(Name, default_width, default_height, false);
 
         graphicsContext.CreateDevice();
 
@@ -59,6 +57,9 @@ public abstract class DesktopHost : Host
 
         presenter.AddDisplay("Default", new Display(Window, swapChain));
 
+        Prepare();
+
+        Window.Visible = true;
         windowsSystem.Run(Load, Update);
     }
 
@@ -66,9 +67,9 @@ public abstract class DesktopHost : Host
     {
     }
 
-    protected override void Update(TimeSpan time)
+    protected override void OnUpdate(TimeSpan time)
     {
-        base.Update(time);
+        base.OnUpdate(time);
         Game?.DrawFrame(time);
     }
 

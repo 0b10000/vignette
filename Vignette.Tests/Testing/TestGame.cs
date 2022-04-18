@@ -3,12 +3,10 @@
 
 using Evergine.Framework;
 
-namespace Vignette.Tests.Testing;
+namespace Vignette.Framework.Tests.Testing;
 
 public class TestGame : Game
 {
-    public Scene CurrentScene { get; private set; }
-
     protected override Scene[] InitializeScenes()
-        => new[] { CurrentScene = new Scene() };
+        => new[] { new Scene() };
 }

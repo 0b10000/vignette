@@ -15,11 +15,11 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Test
-        run: dotnet test Vignette.Tests.sln --logger "trx;LogFileName=TestResults-Vignette.Tests.trx"
+        run: dotnet test Vignette.sln --logger "trx;LogFileName=results.trx"
 
       - name: Upload Results
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
-          name: TestResults-Vignette.Tests
-          path: ${{ github.workspace }}/Tests/Vignette.Tests/TestResults/TestResults-Vignette.Tests.trx
+          name: results
+          path: ${{ github.workspace }}/Vignette.Tests/TestResults/results.trx

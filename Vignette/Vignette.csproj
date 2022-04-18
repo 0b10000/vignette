@@ -1,22 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GenerateEvergineContent>True</GenerateEvergineContent>
     <GenerateEvergineAssets>False</GenerateEvergineAssets>
     <GenerateEvergineScenesCode>True</GenerateEvergineScenesCode>
     <LangVersion>10</LangVersion>
+    <AssemblyName>Vignette.Framework</AssemblyName>
+    <RootNamespace>Vignette.Framework</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="DotNet.Glob" Version="3.1.3" />
     <PackageReference Include="Evergine.Common" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.Components" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.Framework" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.Mathematics" Version="2022.2.16.4" />
-    <PackageReference Include="Evergine.NoesisGUI" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.Platform" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.Bullet" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.Targets" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.CodeScenes" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.OpenAL" Version="2022.2.16.4" />
     <PackageReference Include="Evergine.OpenGL" Version="2022.2.16.4" />
+    <PackageReference Include="Microsoft.ClearScript.V8" Version="7.2.4" />
+    <PackageReference Include="Microsoft.ClearScript.V8.Native.win-x64" Version="7.2.4" />
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Vignette.Platform;
+namespace Vignette.Framework.Platform;
 
 /// <summary>
 /// Base class for application hosts.
@@ -36,12 +36,13 @@ public abstract class Host : IDisposable
         Game.Container.RegisterInstance(this);
     }
 
-    protected virtual void Load()
+    protected void Load()
     {
         if (IsLoaded)
             return;
 
         Game?.Initialize();
+        OnLoad();
 
         IsLoaded = true;
     }
@@ -50,10 +51,14 @@ public abstract class Host : IDisposable
     {
         var elapsed = clock.Elapsed;
         clock.Restart();
-        Update(elapsed);
+        OnUpdate(elapsed);
     }
 
-    protected virtual void Update(TimeSpan time)
+    protected virtual void OnLoad()
+    {
+    }
+
+    protected virtual void OnUpdate(TimeSpan time)
     {
         Game?.UpdateFrame(time);
     }

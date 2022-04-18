@@ -4,12 +4,13 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Evergine.Framework;
+using Evergine.Framework.Services;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
-namespace Vignette.Tests.Testing;
+namespace Vignette.Framework.Tests.Testing;
 
-public abstract class TestComponent : Component
+public abstract class TestScene : Component
 {
     private HeadlessHost host;
     private Task runTask;
@@ -18,6 +19,9 @@ public abstract class TestComponent : Component
     [OneTimeSetUp]
     public void OneTimeSetUpForRunner()
     {
+        if (!TestUtils.IsTestHost)
+            return;
+
         host = new HeadlessHost();
         runTask = Task.Factory.StartNew(() => host.Run(new TestGame()), TaskCreationOptions.LongRunning);
 
@@ -26,13 +30,6 @@ public abstract class TestComponent : Component
             checkForErrors();
             Thread.Sleep(10);
         }
-    }
-
-    [SetUp]
-    public void SetUpForRunner()
-    {
-        if (!TestUtils.IsTestHost)
-            return;
 
         bool ready = false;
 
@@ -47,11 +44,12 @@ public abstract class TestComponent : Component
             TestExecutionContext.CurrentContext.CurrentRepeatCount = context.CurrentRepeatCount;
             TestExecutionContext.CurrentContext.CurrentUICulture = context.CurrentUICulture;
 
-            entity = new Entity("Test")
-                .AddComponent(this);
+            entity = new Entity("Test");
+            entity.AddComponent(this);
 
-            var game = host.Game as TestGame;
-            game.CurrentScene.Managers.EntityManager.Add(entity);
+            var sceneManager = host.Game.Container.Resolve<ScreenContextManager>();
+            sceneManager.CurrentContext[0].Managers.EntityManager.Add(entity);
+
             checkForErrors();
 
             ready = true;
@@ -64,18 +62,29 @@ public abstract class TestComponent : Component
     [TearDown]
     public void TearDownFromRunner()
     {
-        host.Perform(() =>
-        {
-            var game = host.Game as TestGame;
-            game.CurrentScene.Managers.EntityManager.Remove(entity);
-            checkForErrors();
-        });
+        checkForErrors();
     }
 
     [OneTimeTearDown]
     public void OneTimeTearDownFromRunner()
     {
-        host.Dispose();
+        if (!TestUtils.IsTestHost)
+            return;
+
+        host.Perform(() =>
+        {
+            Managers.EntityManager.Remove(entity);
+            checkForErrors();
+        });
+
+        try
+        {
+            // TODO: Investigate NullReferenceException caused by non-existent graphics backend.
+            host.Dispose();
+        }
+        catch
+        {
+        }
     }
 
     private void checkForErrors()

@@ -5,7 +5,7 @@ using Evergine.Common.Graphics;
 using Evergine.Forms;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
-using Vignette.Platform;
+using Vignette.Framework.Platform;
 
 namespace Vignette.Windows;
 
@@ -27,6 +27,8 @@ public class WindowsHost : DesktopHost
 
     protected override void Prepare()
     {
+        Window.NativeWindow.BackColor = System.Drawing.Color.Black;
+
         var windowId = Win32Interop.GetWindowIdFromWindow(Window.NativeWindow.Handle);
         var appWindow = AppWindow.GetFromWindowId(windowId);
 

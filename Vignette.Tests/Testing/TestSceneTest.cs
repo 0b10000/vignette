@@ -3,9 +3,9 @@
 
 using NUnit.Framework;
 
-namespace Vignette.Tests.Testing;
+namespace Vignette.Framework.Tests.Testing;
 
-public class TestComponentTest : TestComponent
+public class TestSceneTest : TestScene
 {
     [Test]
     public void TestInsertComponent()
