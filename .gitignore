@@ -329,7 +329,9 @@ ASALocalRun/
 
 # Evergine
 .evergine/
-EvergineContent.cs
+# Test runners are failing as we aren't pushing this file.
+# TODO: Uncomment if its causing issues for others
+# EvergineContent.cs
 !**/Content/**/*.obj
 **/wwwroot/lib/
 **/wwwroot/evergine.js
